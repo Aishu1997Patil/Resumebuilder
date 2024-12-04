@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Resume Builder</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-green-600 text-white py-4">
+        <h1 class="text-center text-2xl font-bold">Login to Resume Builder</h1>
+    </header>
+    <main class="flex justify-center items-center min-h-screen">
+        <form id="loginForm" class="bg-white p-6 rounded shadow-lg w-96">
+            <img src="OIP.jpg" alt="Login Icon" class="mx-auto mb-4">
+            <h2 class="text-xl font-semibold mb-4 text-center">Login to Your Account</h2>
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium">Email:</label>
+                <input type="email" id="email" class="border w-full p-2 rounded" placeholder="example@mail.com" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium">Password:</label>
+                <input type="password" id="password" class="border w-full p-2 rounded" placeholder="Password" required>
+            </div>
+            <button type="submit" class="bg-green-600 text-white py-2 px-4 rounded w-full hover:bg-green-700">Login</button>
+            <p class="text-center mt-4 text-sm">Don't have an account? <a href="register.html" class="text-green-500 underline">Register here</a></p>
+        </form>
+    </main>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => user.email === email && user.password === password);
+
+            if (user) {
+                alert(`Welcome, ${user.name}!`);
+                window.location.href = 'home.html';
+            } else {
+                alert('Invalid email or password!');
+            }
+        });
+    </script>
+</body>
+</html>
